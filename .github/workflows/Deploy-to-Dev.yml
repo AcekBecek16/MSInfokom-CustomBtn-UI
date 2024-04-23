@@ -5,7 +5,7 @@ on:
     paths:
       - 'force-app/**'
     branches: 
-      - 'Dev*'
+      - 'Dev-*'
 
 jobs:
     Deploy-To-Developer:
