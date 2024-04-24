@@ -95,13 +95,17 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
             for (let i = 0; i < outputVariables.length; i++) {
               const outputVar = outputVariables[i];
               if (outputVar.name === "setOrderID_Output") {
+                console.log('output variables ', outputVar.value)
                 this.navigateToRecord(outputVar.value);
               }
             }
+            console.log('Input Variables ', JSON.stringify(this.flowVariables))
             this.flowName = ''
             this.renderFlow = false
             this.dispatchEvent(new CloseActionScreenEvent())
-          }
+        }else{
+            console.log('Flow execution encountered an unexpected status.');
+        }
     }
 
     navigateToRecord(recordId) {
