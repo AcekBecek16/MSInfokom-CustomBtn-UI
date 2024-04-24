@@ -12,7 +12,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
     ProjectBudget = 9999999
     flowName = ''
     renderFlow;
-    flowVariables
+    
 
     @wire(graphql, {
       query: gql`
@@ -85,20 +85,12 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
     handleSave(event){
         this.flowName = 'Copy_Opportunity_to_Order'
         
-        this.flowVariables =[
-            {
-                name: 'getOpportunityID',
-                type: 'String',
-                value: this.recordId
-            }
-        ]
-
         this.renderFlow = true
     }
 
     statusFlowChange(event){
         
-        if (event.detail.status === "FINISHED") {
+        if (event.detail.status === "FINISHED_SCREEN") {
             const outputVariables = event.detail.outputVariables;
             for (let i = 0; i < outputVariables.length; i++) {
               const outputVar = outputVariables[i];
@@ -108,6 +100,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
             }
             this.flowName = ''
             this.renderFlow = false
+            this.dispatchEvent(new CloseActionScreenEvent())
           }
     }
 
@@ -119,5 +112,15 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
             actionName: "view",
           },
         });
-      }
+    }
+
+    get flowVariables(){
+        return [
+            {
+                name: 'getOpportunityID',
+                type: 'String',
+                value: this.recordId
+            }
+        ]
+    }
 }
