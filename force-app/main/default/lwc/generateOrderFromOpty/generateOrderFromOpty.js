@@ -54,6 +54,10 @@ export default class GenerateOrderFromOpty extends LightningElement {
       if (data) {
         this.records = data.uiapi.query.Opportunity.edges.map((edge) => edge.node);
         this.SPK = this.records[0].SPK__c.value
+
+        console.log('Records', JSON.stringify(this.records));
+        console.log('Record Id', this.recordId)
+        console.log('SPK ', this.SPK)
       }
       this.errors = errors;
     }
