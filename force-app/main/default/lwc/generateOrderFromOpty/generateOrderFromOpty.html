@@ -11,6 +11,12 @@
             </p>
           </div>
       </lightning-modal-body>
+      <lightning-flow
+        if:true={renderFlow}
+        flow-api-name={flowName}
+        flow-input-variables={flowVariables}
+        onstatuschange={statusFlowChange}
+      ></lightning-flow>
       <lightning-modal-footer>
         <lightning-button 
           variant="neutral"

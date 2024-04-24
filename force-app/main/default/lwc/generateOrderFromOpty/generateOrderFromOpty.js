@@ -1,14 +1,18 @@
 import { LightningElement, api, wire } from 'lwc';
 import { gql, graphql,refreshGraphQL } from "lightning/uiGraphQLApi";
 import { CloseActionScreenEvent } from 'lightning/actions';
+import { NavigationMixin } from "lightning/navigation";
 
-export default class GenerateOrderFromOpty extends LightningElement {
+export default class GenerateOrderFromOpty extends NavigationMixin(LightningElement) {
     @api recordId
 
     headerLabel = 'Confirmation Order'
     SPK = '00000'
     orderName = 'Dummy Order Name'
     ProjectBudget = 9999999
+    flowName = ''
+    renderFlow;
+    flowVariables
 
     @wire(graphql, {
       query: gql`
@@ -73,11 +77,47 @@ export default class GenerateOrderFromOpty extends LightningElement {
     }
 
 
+
     handleCancel(event){
         this.dispatchEvent(new CloseActionScreenEvent())
     }
 
     handleSave(event){
+        this.flowName = 'Copy_Opportunity_to_Order'
+        
+        this.flowVariables =[
+            {
+                name: 'getOpportunityID',
+                type: 'String',
+                value: this.recordId
+            }
+        ]
 
+        this.renderFlow = true
     }
+
+    statusFlowChange(event){
+        
+        if (event.detail.status === "FINISHED") {
+            const outputVariables = event.detail.outputVariables;
+            for (let i = 0; i < outputVariables.length; i++) {
+              const outputVar = outputVariables[i];
+              if (outputVar.name === "setOrderID_Output") {
+                this.navigateToRecord(outputVar.value);
+              }
+            }
+            this.flowName = ''
+            this.renderFlow = false
+          }
+    }
+
+    navigateToRecord(recordId) {
+        this[NavigationMixin.Navigate]({
+          type: "standard__recordPage",
+          attributes: {
+            recordId,
+            actionName: "view",
+          },
+        });
+      }
 }
