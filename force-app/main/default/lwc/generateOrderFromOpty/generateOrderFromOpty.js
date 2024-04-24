@@ -90,6 +90,8 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
 
     statusFlowChange(event){
         
+        console.log('Output Varuables ',event.detail.outputVariables);
+        
         if (event.detail.status === "FINISHED_SCREEN") {
             const outputVariables = event.detail.outputVariables;
             for (let i = 0; i < outputVariables.length; i++) {
