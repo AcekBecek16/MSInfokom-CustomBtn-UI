@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { gql, graphql,refreshGraphQL } from "lightning/uiGraphQLApi";
+import { CloseActionScreenEvent } from 'lightning/actions';
 
 export default class GenerateOrderFromOpty extends LightningElement {
     @api recordId
@@ -37,6 +38,10 @@ export default class GenerateOrderFromOpty extends LightningElement {
                                     displayValue
                                     value
                                 }
+                                Amount{
+                                    displayValue
+                                    value
+                                }
                                 SPK__c{
                                     value
                                 }
@@ -54,10 +59,9 @@ export default class GenerateOrderFromOpty extends LightningElement {
       if (data) {
         this.records = data.uiapi.query.Opportunity.edges.map((edge) => edge.node);
         this.SPK = this.records[0].SPK__c.value
+        this.orderName = this.records[0].Name.value
+        this.ProjectBudget = this.records[0].displayValue
 
-        console.log('Records', JSON.stringify(this.records));
-        console.log('Record Id', this.recordId)
-        console.log('SPK ', this.SPK)
       }
       this.errors = errors;
     }
