@@ -60,7 +60,7 @@ export default class GenerateOrderFromOpty extends LightningElement {
         this.records = data.uiapi.query.Opportunity.edges.map((edge) => edge.node);
         this.SPK = this.records[0].SPK__c.value
         this.orderName = this.records[0].Name.value
-        this.ProjectBudget = this.records[0].displayValue
+        this.ProjectBudget = this.records[0].Amount.displayValue
 
       }
       this.errors = errors;
