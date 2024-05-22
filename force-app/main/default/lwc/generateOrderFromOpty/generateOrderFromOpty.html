@@ -12,7 +12,7 @@
           </div>
       </lightning-modal-body>
       <lightning-flow
-        flow-api-name={flowName}
+        flow-api-name='Copy_Opportunity_to_Order'
         flow-input-variables={flowVariables}
         onstatuschange={statusFlowChange}
       ></lightning-flow>
@@ -21,13 +21,13 @@
           variant="neutral"
           label="Cancel" 
           onclick={handleCancel}
-          class="slds-m-around_x-small"
+          class="slds-m-around_xx-small"
         ></lightning-button>
         <lightning-button 
           variant="brand"
           label="Save" 
           onclick={handleSave} 
-          class="slds-m-around_x-small"
+          class="slds-m-around_xx-small"
         ></lightning-button>
       </lightning-modal-footer>
 </template>

@@ -86,11 +86,13 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
         this.flowName = 'Copy_Opportunity_to_Order'
         
         this.renderFlow = true
+
+        console.log('Flow Name '+this.flowName)
     }
 
     statusFlowChange(event){
         
-        console.log('Output Varuables ',event.detail.outputVariables);
+        console.log('Output Variables ',event.detail.outputVariables);
         
         if (event.detail.status === "FINISHED_SCREEN") {
             const outputVariables = event.detail.outputVariables;
