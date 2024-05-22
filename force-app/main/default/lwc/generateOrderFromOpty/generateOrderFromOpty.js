@@ -128,7 +128,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
             {
                 name: 'getOpportunityID',
                 type: 'String',
-                value: this.recordId
+                value: '006BK00000ABgW2YAL'
             }
         ]
     }
