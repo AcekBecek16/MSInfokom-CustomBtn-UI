@@ -1,0 +1,33 @@
+<template>
+      <lightning-modal-header label={headerLabel}></lightning-modal-header>
+      <lightning-modal-body>
+        <div class="slds-box slds-theme_shade slds-theme_alert-texture">
+            <p>
+                Are you sure to Cerate Order with following information : <br/>
+                SPK : <b>{SPK}</b><br/>
+                Name : <b>{orderName}</b><br/>
+                Project Budget : <b>{ProjectBudget}</b>
+
+            </p>
+          </div>
+      </lightning-modal-body>
+      <lightning-flow
+        flow-api-name={flowName}
+        flow-input-variables={flowVariables}
+        onstatuschange={statusFlowChange}
+      ></lightning-flow>
+      <lightning-modal-footer>
+        <lightning-button 
+          variant="neutral"
+          label="Cancel" 
+          onclick={handleCancel}
+          class="slds-m-around_x-small"
+        ></lightning-button>
+        <lightning-button 
+          variant="brand"
+          label="Save" 
+          onclick={handleSave} 
+          class="slds-m-around_x-small"
+        ></lightning-button>
+      </lightning-modal-footer>
+</template>
