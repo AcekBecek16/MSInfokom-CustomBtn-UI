@@ -10,7 +10,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
     SPK = '00000'
     orderName = 'Dummy Order Name'
     ProjectBudget = 9999999
-    flowName = ''
+    flowName = 'Copy_Opportunity_to_Order'
     renderFlow;
     
 
@@ -128,7 +128,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
             {
                 name: 'getOpportunityID',
                 type: 'String',
-                value: '006BK00000ABgW2YAL'
+                value: this.recordId
             }
         ]
     }
