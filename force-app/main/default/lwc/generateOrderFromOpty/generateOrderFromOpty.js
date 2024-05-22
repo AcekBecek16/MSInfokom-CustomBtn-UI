@@ -9,7 +9,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
     headerLabel = 'Confirmation Order'
     SPK = '00000'
     orderName = 'Dummy Order Name'
-    ProjectBudget = 9999999
+    ProjectBudget = 999
     flowName = ''
     renderFlow;
     
@@ -64,10 +64,10 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
         this.records = data.uiapi.query.Opportunity.edges.map((edge) => edge.node);
         this.SPK = this.records[0].SPK__c.value
         this.orderName = this.records[0].Name.value
-        let calculateProjectBudget = (this.records[0].Amount_Maintenance__c.displayValue+this.records[0].Amount_Service__c.displayValue)*0.6
-        let projectBudgetString = calculateProjectBudget.toFixed(2)
+        let calculateProjectBudget = (this.records[0].Amount_Maintenance__c.value+this.records[0].Amount_Service__c.value)*0.6
+        let projectBudgetString = calculateProjectBudget.toFixed(-5)
         this.ProjectBudget = parseFloat(projectBudgetString)
-        
+
       }
       this.errors = errors;
     }
