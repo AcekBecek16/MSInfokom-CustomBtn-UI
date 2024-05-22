@@ -64,8 +64,9 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
         this.records = data.uiapi.query.Opportunity.edges.map((edge) => edge.node);
         this.SPK = this.records[0].SPK__c.value
         this.orderName = this.records[0].Name.value
-        this.ProjectBudget = (this.records[0].Amount_Maintenance__c.displayValue+this.records[0].Amount_Service__c.displayValue)*0.6,-5
-        
+        let calculateProjectBudget = (this.records[0].Amount_Maintenance__c.displayValue+this.records[0].Amount_Service__c.displayValue)*0.6
+        let projectBudgetString = calculateProjectBudget.toFixed(2)
+        this.ProjectBudget = parseFloat(projectBudgetString)
         
       }
       this.errors = errors;
