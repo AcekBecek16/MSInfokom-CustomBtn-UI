@@ -65,9 +65,6 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
                                 Service_Generated__c{
                                     value
                                 }
-                                Service_Contract__c{
-                                    value
-                                }
                             }
                         }
                     }
@@ -89,6 +86,9 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
                                     value
                                 }
                                 Name{
+                                    value
+                                }
+                                Service_Contract__c{
                                     value
                                 }
                             }
