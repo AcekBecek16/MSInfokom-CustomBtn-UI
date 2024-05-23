@@ -1,40 +1,68 @@
 <template>
     <lightning-modal-header label={headerLabel}></lightning-modal-header>
     <lightning-modal-body>
-    <div class="slds-region_narrow">
-        <dl class="slds-dl_horizontal">
-            <dt class="slds-dl_horizontal__label">
-                SPK Number
-            </dt>
-            <dd class="slds-dl_horizontal__detail">
-                {spkNumber}
-            </dd>
-            <dt class="slds-dl_horizontal__label">
-                Account Name
-            </dt>
-            <dd class="slds-dl_horizontal__detail">
-                {accountName}
-            </dd>
-            <dt class="slds-dl_horizontal__label">
-                Order Name
-            </dt>
-            <dd class="slds-dl_horizontal__detail">
-                {orderName}
-            </dd>
-            <dt class="slds-dl_horizontal__label">
-                Product Category
-            </dt>
-            <dd class="slds-dl_horizontal__detail">
-                {productCategory}
-            </dd>
-            <dt class="slds-dl_horizontal__label">
-                Order Type
-            </dt>
-            <dd class="slds-dl_horizontal__detail">
-                {orderType}
-            </dd>
-        </dl>
-    </div>
+        <div class="slds-box slds-theme_shade slds-theme_alert-texture slds-m-botton_xx-small">
+            <p style="font-weight: bold;">
+                Are you sure you want to create Project/Service Contract with following
+                information :
+            </p>
+            <div class="slds-region_narrow">
+                <dl class="slds-dl_horizontal">
+                    <dt class="slds-dl_horizontal__label">
+                        Name
+                    </dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        {orderName}
+                    </dd>
+                    <dt class="slds-dl_horizontal__label">
+                        SPK Number
+                    </dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        {spkNumber}
+                    </dd>
+                    <dt class="slds-dl_horizontal__label">
+                        Account Name
+                    </dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        {accountName}
+                    </dd>
+                    <dt class="slds-dl_horizontal__label">
+                        Product Category
+                    </dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        {productCategory}
+                    </dd>
+                    <dt class="slds-dl_horizontal__label">
+                        Type
+                    </dt>
+                    <dd class="slds-dl_horizontal__detail">
+                        {orderType}
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="slds-region_narrow" style="width:360px">
+            <dl class="slds-dl_inline">
+                <dt class="slds-dl_inline__label">
+                    Project
+                </dt>
+                <dd class="slds-dl_inline__detail">
+                    <lightning-badge 
+                      label="Not Created"
+                      class="slds-badge_inverse"
+                    ></lightning-badge>
+                </dd>
+                <dt class="slds-dl_inline__label">
+                    Service Contract
+                </dt>
+                <dd class="slds-dl_inline__detail">
+                    <lightning-badge 
+                      label="No Created"
+                      class="slds-badge_inverse"
+                    ></lightning-badge>
+                </dd>
+            </dl>
+        </div>
     </lightning-modal-body>
     <lightning-modal-footer>
       <lightning-button 
@@ -46,12 +74,14 @@
       <lightning-button 
         variant="brand"
         label={btnServiceContract}
-        onclick={handleServiceContract} 
+        onclick={handleServiceContract}
+        class="slds-m-around_xx-small"
       ></lightning-button>
       <lightning-button 
         variant="brand"
         label={btnProject}
         onclick={handleProject} 
+        class="slds-m-around_xx-small"
       ></lightning-button>
     </lightning-modal-footer>
 </template>
