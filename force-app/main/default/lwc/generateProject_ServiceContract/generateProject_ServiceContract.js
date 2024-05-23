@@ -69,7 +69,7 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     })
     graphqlQueryResult({ data, errors }) {
       if (data) {
-        this.records = data.uiapi.query.sObjectName.edges.map((edge) => edge.node);
+        this.records = data.uiapi.query.Order.edges.map((edge) => edge.node);
 
         this.spkNumber = this.records[0].SPK__c.value
         this.hedearLabel = 'Create Project/Service Contact '+this.spkNumber
