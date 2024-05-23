@@ -15,6 +15,7 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     btnProject = 'Create Project'
     btnServiceContract = 'Create Service Contract'
     projectGenerated = false
+    serviceGenerated = false
     flowName
     ProjectId
     SeviceContractId
@@ -64,6 +65,9 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
                                 Service_Generated__c{
                                     value
                                 }
+                                Service_Contract__c{
+                                    value
+                                }
                             }
                         }
                     }
@@ -108,8 +112,12 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
         this.accountName = this.records[0].Account.Name.value
         this.orderType = this.records[0].Type.value
         this.projectGenerated = this.records[0].Project_Generated__c.value
+        this.serviceGenerated = this.records[0].Service_Generated__c.value
 
-        if(this.projectRecords.length > 0)this.ProjectId = this.projectRecords[0].Id
+        if(this.projectRecords.length > 0){
+            this.ProjectId = this.projectRecords[0].Id
+            this.SeviceContractId = this.projectRecords[0].Service_Contract__c.value
+        }
 
         if(this.projectGenerated)this.btnProject = 'View Project'
         if(this.records[0].Service_Generated__c.value)this.btnServiceContract = 'View Service Contract'
@@ -136,6 +144,15 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
             this.renderFlow = true
         }
         // console.log('record id ', this.recordId)
+    }
+
+    handleServiceContract(event){
+        if(this.serviceGenerated){
+            this.navigateToRecord(this.SeviceContractId)
+        }else{
+            this.flowName = 'Order_to_Service_Contract'
+            this.renderFlow = true
+        }
     }
 
     handleStatusChange(event){
