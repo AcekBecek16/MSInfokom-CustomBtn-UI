@@ -2,13 +2,22 @@
       <lightning-modal-header label={headerLabel}></lightning-modal-header>
       <lightning-modal-body>
         <div class="slds-box slds-theme_shade slds-theme_alert-texture">
-            <p>
-                Are you sure to Cerate Order with following information : <br/>
-                SPK : <b>{SPK}</b><br/>
-                Name : <b>{orderName}</b><br/>
-                Project Budget : <b>{ProjectBudget}</b>
-
-            </p>
+                <p class="headerText slds-m-button_x-small">
+                  Are you sure to Cerate Order with following information : 
+                </p>
+                <div class="slds-region_narrow">
+                  <dl class="slds-dl_horizontal">
+                    <dt class="slds-dl_horizontal__label">SPK</dt>
+                    <dd class="slds-dl_horizontal__detail">{SPK}</dd>
+  
+                    <dt class="slds-dl_horizontal__label">Name</dt>
+                    <dd class="slds-dl_horizontal__detail">{orderName}</dd>
+  
+                    <dt class="slds-dl_horizontal__label">Project Budget</dt>
+                    <dd class="slds-dl_horizontal__detail">{ProjectBudget}</dd>
+                  </dl>
+                </div>
+                
           </div>
       </lightning-modal-body>
       <lightning-flow
@@ -21,13 +30,24 @@
           variant="neutral"
           label="Cancel" 
           onclick={handleCancel}
-          class="slds-m-around_x-small"
+          class="slds-m-around_xx-small"
         ></lightning-button>
-        <lightning-button 
+        <template if:true={orderGenerated}>
+          <lightning-button 
+          variant="brand"
+          label="View" 
+          onclick={handleView} 
+          class="slds-m-around_xx-small"
+        ></lightning-button>
+        </template>
+        <template if:false={orderGenerated}>
+          <lightning-button 
           variant="brand"
           label="Save" 
           onclick={handleSave} 
-          class="slds-m-around_x-small"
+          class="slds-m-around_xx-small"
         ></lightning-button>
+        </template>
+        
       </lightning-modal-footer>
 </template>
