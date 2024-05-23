@@ -105,15 +105,37 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
             this.navigateToRecord(this.recordId);
         }else{
             this.flowName = 'Order_to_Project'
-        
             this.renderFlow = true
-
-            console.log('Flow Name '+this.flowName)
         }
     }
 
     handleStatusChange(event){
 
+        if (event.detail.status === "FINISHED_SCREEN") {
+            const outputVariables = event.detail.outputVariables;
+            for (let i = 0; i < outputVariables.length; i++) {
+              const outputVar = outputVariables[i];
+              if (outputVar.name === "outputRecordID") {
+                this.navigateToRecord(outputVar.value);
+              }
+            }
+            this.flowName = ''
+            this.renderFlow = false
+            this.dispatchEvent(new CloseActionScreenEvent())
+        }else{
+            console.log('Flow execution encountered an unexpected status.');
+        }
+
+    }
+
+    get inputVariables(){
+        return [
+            {
+                name: 'getOrderRecordID',
+                type: 'String',
+                value: this.recordId
+            }
+        ]
     }
 
     navigateToRecord(recordId) {
