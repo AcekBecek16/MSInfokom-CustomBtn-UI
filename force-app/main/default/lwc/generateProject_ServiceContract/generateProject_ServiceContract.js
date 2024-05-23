@@ -116,9 +116,11 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
             for (let i = 0; i < outputVariables.length; i++) {
               const outputVar = outputVariables[i];
               if (outputVar.name === "outputRecordID") {
+                console.log('output variables ', outputVar.value)
                 this.navigateToRecord(outputVar.value);
               }
             }
+            console.log('Input Variables ', JSON.stringify(this.inputVariables))
             this.flowName = ''
             this.renderFlow = false
             this.dispatchEvent(new CloseActionScreenEvent())
