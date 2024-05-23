@@ -1,3 +1,39 @@
 <template>
-    
+  <lightning-modal-header label={headerLabel}></lightning-modal-header>
+  <lightning-modal-body>
+    <div class="slds-box slds-theme_shade slds-theme_alert-texture">
+        <div class="slds-region_narrow">
+            <dl class="slds-dl_horizontal">
+              <dt class="slds-dl_horizontal__label textLabel">Account</dt>
+              <dd class="slds-dl_horizontal__detail">
+                <lightning-badge 
+                  label="Synced"
+                  class="slds-badge slds-theme_success"
+                ></lightning-badge>
+              </dd>
+              <dt class="slds-dl_horizontal__label textLabel">Project</dt>
+              <dd class="slds-dl_horizontal__detail">
+                <lightning-badge 
+                  label="Not Sync"
+                  class="slds-badge slds-theme_warning"
+                ></lightning-badge>
+              </dd>
+              <dt class="slds-dl_horizontal__label textLabel">Product</dt>
+              <dd class="slds-dl_horizontal__detail">
+                <lightning-badge 
+                  label="Not Sync"
+                  class="slds-badge slds-theme_warning"
+                ></lightning-badge>
+              </dd>
+            </dl>
+        </div>
+    </div>
+  </lightning-modal-body>
+  <lightning-modal-footer>
+    <lightning-button 
+      variant="brand-outline"
+      label="Cancel" 
+      onclick={handleCancel} 
+    ></lightning-button>
+  </lightning-modal-footer>
 </template>
