@@ -7,11 +7,14 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     
     recordId
     spkNumber = '12345'
-    hedearLabel = 'Create Project/Service Contract'
+    headerLabel = 'Create Project/Service Contract'
     orderType
     accountName
     orderName
     productCategory
+    btnProject = 'Create Project'
+    btnServiceContract = 'Create Service Contract'
+    projectGenerated = false
     
     @wire(graphql, {
       query: gql`
@@ -72,11 +75,15 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
         this.records = data.uiapi.query.Order.edges.map((edge) => edge.node);
 
         this.spkNumber = this.records[0].SPK__c.value
-        this.hedearLabel = 'Create Project/Service Contact '+this.spkNumber
+        this.headerLabel = 'Create Project/Service Contact '+this.spkNumber
         this.productCategory = this.records[0].Product_Category__c.value
         this.orderName = this.records[0].Opportunity.Name.value
         this.accountName = this.records[0].Account.Name.value
         this.orderType = this.records[0].Type.value
+        this.projectGenerated = this.records[0].Project_Generated__c.value
+
+        if(this.projectGenerated)this.btnProject = 'View Project'
+        if(this.records[0].Service_Generated__c.value)this.btnServiceContract = 'View Service Contract'
 
       }
       this.errors = errors;
@@ -90,6 +97,12 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
 
     handleCancel(event){
         this.dispatchEvent(new CloseActionScreenEvent())
+    }
+
+    handleProject(event){
+        if(this.projectGenerated){
+            this.navigateToRecord(this.recordId);
+        }
     }
 
     navigateToRecord(recordId) {
