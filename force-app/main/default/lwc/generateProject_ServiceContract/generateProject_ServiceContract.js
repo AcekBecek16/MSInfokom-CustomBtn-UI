@@ -15,6 +15,7 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     btnProject = 'Create Project'
     btnServiceContract = 'Create Service Contract'
     projectGenerated = false
+    flowName
     
     @wire(graphql, {
       query: gql`
@@ -102,7 +103,17 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     handleProject(event){
         if(this.projectGenerated){
             this.navigateToRecord(this.recordId);
+        }else{
+            this.flowName = 'Order_to_Project'
+        
+            this.renderFlow = true
+
+            console.log('Flow Name '+this.flowName)
         }
+    }
+
+    handleStatusChange(event){
+
     }
 
     navigateToRecord(recordId) {

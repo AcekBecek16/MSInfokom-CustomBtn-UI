@@ -97,9 +97,6 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
 
         if(this.records[0].Order_Generated__c.value)this.orderGenerated = true
 
-        console.log('Opportunity Records :', this.records);
-        console.log('Order Records :', this.orderRecords);
-
       }
       this.errors = errors;
     }
@@ -120,16 +117,12 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
         
         this.renderFlow = true
 
-        console.log('Flow Name '+this.flowName)
     }
     handleView(event){
         this.navigateToRecord(this.orderRecords[0].Id)
     }
 
     statusFlowChange(event){
-        
-        console.log('Output Variables ',event.detail.outputVariables);
-        console.log('Flow Name '+this.flowName)
         
         if (event.detail.status === "FINISHED_SCREEN") {
             const outputVariables = event.detail.outputVariables;

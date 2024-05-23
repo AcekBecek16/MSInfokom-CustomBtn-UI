@@ -38,7 +38,7 @@
                     <dd class="slds-dl_horizontal__detail">
                         {orderType}
                     </dd>
-                    <dt class="slds-dl_horizontal__label">
+                    <!-- <dt class="slds-dl_horizontal__label">
                         Project
                     </dt>
                     <dd class="slds-dl_horizontal__detail">
@@ -55,12 +55,17 @@
                         label="No Created"
                         class="slds-badge_inverse"
                         ></lightning-badge>
-                    </dd>
+                    </dd> -->
                 </dl>
             </div>
         </div>
     </lightning-modal-body>
     <lightning-modal-footer>
+        <lightning-flow
+          flow-api-name={flowName}
+          flow-input-variables={inputVariables}
+          onstatuschange={handleStatusChange}
+        ></lightning-flow>
       <lightning-button 
         variant="brand-outline"
         label="Cancel" 
