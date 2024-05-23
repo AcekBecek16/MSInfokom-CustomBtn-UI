@@ -1,0 +1,28 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+    <div class="slds-region_narrow">
+        <dl class="slds-dl_horizontal">
+            <dt class="slds-dl_horizontal__label">
+                SPK Number
+            </dt>
+            <dd class="slds-dl_horizontal__detail">
+                {spkNumber}
+            </dd>
+        </dl>
+    </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+      <lightning-button 
+        variant="brand-outline"
+        label="Cancel" 
+        onclick={handleCancel}
+        class="slds-m-around_xx-small" 
+      ></lightning-button>
+      <lightning-button 
+        variant="brand"
+        label="Create Project" 
+        onclick={handleCreateProject} 
+      ></lightning-button>
+    </lightning-modal-footer>
+</template>
