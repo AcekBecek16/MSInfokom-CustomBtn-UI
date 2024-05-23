@@ -5,7 +5,7 @@ import { NavigationMixin } from "lightning/navigation";
 
 export default class GenerateProject_ServiceContract extends NavigationMixin(LightningElement) {
     
-    recordId
+    @api recordId
     spkNumber = '12345'
     headerLabel = 'Create Project/Service Contract'
     orderType
@@ -16,6 +16,8 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     btnServiceContract = 'Create Service Contract'
     projectGenerated = false
     flowName
+    ProjectId
+    SeviceContractId
     
     @wire(graphql, {
       query: gql`
@@ -67,6 +69,29 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
                     }
                 }
             }
+            uiapi{
+                query{
+                    Project__c(
+                        where:{
+                            Order__c:{
+                                eq:$OrderId
+                            }
+                        }
+                    ){
+                        edges{
+                            node{
+                                Id
+                                SPK__c{
+                                    value
+                                }
+                                Name{
+                                    value
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
       `,
       variables: "$variables", // Use a getter function to make the variables reactive
@@ -74,6 +99,7 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     graphqlQueryResult({ data, errors }) {
       if (data) {
         this.records = data.uiapi.query.Order.edges.map((edge) => edge.node);
+        this.projectRecords = data.uiapi.query.Project__c.edges.map((edge) => edge.node)
 
         this.spkNumber = this.records[0].SPK__c.value
         this.headerLabel = 'Create Project/Service Contact '+this.spkNumber
@@ -82,6 +108,8 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
         this.accountName = this.records[0].Account.Name.value
         this.orderType = this.records[0].Type.value
         this.projectGenerated = this.records[0].Project_Generated__c.value
+
+        if(this.projectRecords.length > 0)this.ProjectId = this.projectRecords[0].Id
 
         if(this.projectGenerated)this.btnProject = 'View Project'
         if(this.records[0].Service_Generated__c.value)this.btnServiceContract = 'View Service Contract'
@@ -102,11 +130,12 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
 
     handleProject(event){
         if(this.projectGenerated){
-            this.navigateToRecord(this.recordId);
+            this.navigateToRecord(this.ProjectId);
         }else{
             this.flowName = 'Order_to_Project'
             this.renderFlow = true
         }
+        // console.log('record id ', this.recordId)
     }
 
     handleStatusChange(event){
@@ -116,11 +145,11 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
             for (let i = 0; i < outputVariables.length; i++) {
               const outputVar = outputVariables[i];
               if (outputVar.name === "outputRecordID") {
-                console.log('output variables ', outputVar.value)
+                // console.log('output variables ', outputVar.value)
                 this.navigateToRecord(outputVar.value);
               }
             }
-            console.log('Input Variables ', JSON.stringify(this.inputVariables))
+            // console.log('Input Variables ', JSON.stringify(this.inputVariables))
             this.flowName = ''
             this.renderFlow = false
             this.dispatchEvent(new CloseActionScreenEvent())
