@@ -15,6 +15,7 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
     orderGenerated = false;
     records = []
     orderRecords = []
+    bodyContent = 'Are you sure to Cerate Order with following information : '
 
     @wire(graphql, {
       query: gql`
@@ -95,7 +96,10 @@ export default class GenerateOrderFromOpty extends NavigationMixin(LightningElem
 
         this.orderRecords = data.uiapi.query.Order.edges.map((edge) => edge.node)
 
-        if(this.records[0].Order_Generated__c.value)this.orderGenerated = true
+        if(this.records[0].Order_Generated__c.value){
+            this.orderGenerated = true
+            this.bodyContent = 'Order Already Created with Following Information : '
+        }
 
       }
       this.errors = errors;

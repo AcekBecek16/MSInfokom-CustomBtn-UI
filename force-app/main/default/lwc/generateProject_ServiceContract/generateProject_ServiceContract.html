@@ -3,8 +3,12 @@
     <lightning-modal-body>
         <div class="slds-box slds-theme_shade slds-theme_alert-texture slds-m-botton_xx-small">
             <p style="font-weight: bold; font-size:14px;">
-                Are you sure you want to create Project/Service Contract with following
-                information :
+                {bodyContent}
+                <template if:true={allCreatd}>
+                    <lightning-badge label="Created"
+                    class="slds-badge slds-theme__success"
+                  ></lightning-badge>
+                </template>
             </p>
             <div class="slds-region_narrow">
                 <dl class="slds-dl_horizontal">

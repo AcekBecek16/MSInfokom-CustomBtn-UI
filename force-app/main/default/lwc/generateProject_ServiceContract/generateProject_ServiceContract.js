@@ -19,6 +19,8 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
     flowName
     ProjectId
     SeviceContractId
+    bodyContent = 'Are you sure you want to create Project/Service Contract with following information :'
+    allCreated = false;
     
     @wire(graphql, {
       query: gql`
@@ -121,6 +123,10 @@ export default class GenerateProject_ServiceContract extends NavigationMixin(Lig
 
         if(this.projectGenerated)this.btnProject = 'View Project'
         if(this.records[0].Service_Generated__c.value)this.btnServiceContract = 'View Service Contract'
+        if(this.projectGenerated && this.records[0].Service_Generated__c.value){
+            this.allCreated = true
+            this.bodyContent = 'Project/Service Contract Already Created with Following Information : '
+        }
 
       }
       this.errors = errors;
