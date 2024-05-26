@@ -10,7 +10,7 @@ export default class SyncOrderSAP extends NavigationMixin(LightningElement) {
 
 
     handleCancel(event){
-        this.dispatchEvent(new CloseActionScreenEvent())
+
     }
 
     navigateToRecord(recordId) {
